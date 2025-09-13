@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FLIXUX</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- أيقونات Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- خلفية فيديو -->
+  <video autoplay loop id="bg-video" muted>
+    <source src="bg.mp4" type="video/mp4">
+    متصفحك لا يدعم الفيديو
+  </video>
+
+  <!-- المحتوى -->
+  <div class="overlay">
+    <h1>YEAH ITS FLIX</h1>
+    <div class="buttons">
+      <a href="https://wa.me/201014508636" class="btn whatsapp"><i class="fab fa-whatsapp"></i> Whatsapp</a>
+      <a href="https://t.me/FLIXUXW" class="btn telegram"><i class="fab fa-telegram"></i> Telegram</a>
+      <a href="https://t.me/flashaudio" class="btn telegram"><i class="fab fa-telegram"></i> Telegram Channel</a>
+      <a href="https://instagram.com/username" class="btn instagram"><i class="fab fa-instagram"></i> Instagram</a>
+    </div>
+    <button id="sound-btn">🔊 تشغيل الصوت</button>
+  </div>
+
+  <!-- ملف الصوت -->
+  <audio id="click-sound" src="click.mp3"></audio>
+
+  <script>
+    const video = document.getElementById('bg-video');
+    const soundBtn = document.getElementById('sound-btn');
+    const clickSound = document.getElementById('click-sound');
+    const buttons = document.querySelectorAll('.btn');
+
+    // أول ضغطة تفتح الصوت للفيديو
+    document.body.addEventListener('click', () => {
+      video.muted = false;
+      video.play();
+    }, { once: true });
+
+    // زرار تشغيل/كتم الصوت
+    soundBtn.addEventListener('click', () => {
+      if (video.muted) {
+        video.muted = false;
+        soundBtn.innerText = "🔇 كتم الصوت";
+      } else {
+        video.muted = true;
+        soundBtn.innerText = "🔊 تشغيل الصوت";
+      }
+    });
+
+    // إضافة صوت عند الضغط على الأزرار
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        clickSound.currentTime = 0;
+        clickSound.play();
+      });
+    });
+  </script>
+</body>
+</html>
